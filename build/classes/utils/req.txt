@@ -1,0 +1,7 @@
+write checks such as isUsernameExists, isEmailExists,priceCalculation for bookings etc in this 
+
+
+insert car dao 
+
+
+implement error page for each try catch 
