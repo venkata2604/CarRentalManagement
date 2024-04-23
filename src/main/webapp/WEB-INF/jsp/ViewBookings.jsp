@@ -18,9 +18,6 @@
 
 <%
 String carModel = (String) session.getAttribute("carModel");
-%>
-<title>Your Bookings</title>
-<%
 int sessionUserId = (int) (session.getAttribute("userid"));
 String sessionFromDate = (String) session.getAttribute("fromDate");
 String sessionTODate = (String) session.getAttribute("toDate");
@@ -29,7 +26,7 @@ List<Bookings> bookings = BookingDao.selectAllBookings();
 </head>
 <body>
 	<div class="navbar">
-		<a href="Index.jsp">Home</a> <a href="ViewBookingsServlet">View
+		<a href="BookingServlet">Home</a> <a href="ViewBookingsServlet">View
 			Bookings</a> <a href="Profile.jsp">Profile</a> <a href="LogoutServlet">Logout</a>
 	</div>
 

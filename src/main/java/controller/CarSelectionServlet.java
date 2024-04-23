@@ -60,7 +60,7 @@ public class CarSelectionServlet extends HttpServlet {
 
 			if (isBookingUpdated) {
 				System.out.println("Inside the CarSelectionServlet");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/BookingConfirmationServlet");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BookingConfirmation.jsp");
 				dispatcher.forward(request, response);
 				
 //				response.sendRedirect("BookingConfirmationServlet");
@@ -70,7 +70,7 @@ public class CarSelectionServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BookinConfirmation.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BookingConfirmation.jsp");
 			dispatcher.forward(request, response);
 			
 //			response.sendRedirect("BookinConfirmation.jsp");

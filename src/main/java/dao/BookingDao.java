@@ -18,9 +18,11 @@ public class BookingDao {
 	private static final String INSERT_BOOKINGS_SQL = "INSERT INTO bookings"
 			+ "  (userid, carid, startdate, enddate,  totalprice, status) VALUES " + " (?, ?, ?, ?, ?, ?);";
 	public static final String SELECT_ALL_BOOKINGS = "SELECT * FROM bookings";
-	public static final String UPDATE_A_BOOKING_STATUS = "UPDATE bookings SET STATUS =? where bookingid = ?";
-	public static final String SELECT_LATEST_BOOKING = "SELECT * FROM bookings ORDER BY bookingtimestamp DESC LIMIT 1";
+	public static final String UPDATE_A_BOOKING = "UPDATE bookings SET startdate=?, enddate=? WHERE bookingid = ?";
 	
+	public static final String SELECT_LATEST_BOOKING = "SELECT * FROM bookings ORDER BY bookingtimestamp DESC LIMIT 1";
+	private static final String DELETE_BOOKING_SQL = "delete from bookings where bookingid = ?;";
+
 	public static Bookings selectBooking(int bookingId) {
 
 		Bookings booking = new Bookings();
@@ -130,11 +132,12 @@ public class BookingDao {
 
 		boolean bookingUpdated = false;
 		try (Connection connection = DbConnection.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_A_BOOKING_STATUS)) {
+				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_A_BOOKING)) {
 			System.out.println(preparedStatement);
 
-			preparedStatement.setString(1, booking.getStatus());
-			preparedStatement.setInt(2, booking.getCarId());
+			preparedStatement.setString(1, booking.getStartDate());
+			preparedStatement.setString(2, booking.getEndDate());
+			preparedStatement.setInt(3,  booking.getBookingId());
 			bookingUpdated = preparedStatement.executeUpdate() > 0;
 
 		}
@@ -185,6 +188,16 @@ public class BookingDao {
 		return booking;
 		
 		
+	}
+	
+	public static boolean deleteBooking(int bookingId) throws SQLException {
+		boolean rowDeleted;
+		try (Connection connection = DbConnection.getConnection();
+				PreparedStatement statement = connection.prepareStatement(DELETE_BOOKING_SQL);) {
+			statement.setInt(1, bookingId);
+			rowDeleted = statement.executeUpdate() > 0;
+		}
+		return rowDeleted;
 	}
 
 	public static void main(String[] args) {

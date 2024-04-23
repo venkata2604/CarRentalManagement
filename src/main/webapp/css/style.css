@@ -162,11 +162,10 @@ h1 {
 }
 
 .content {
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	padding-top: 80px; /* Adjust based on navbar height */
-	height: calc(100% - 60px); /* Adjust based on navbar height */
+	height: auto; /* Adjust based on navbar height */
 }
 
 .radio-group {
@@ -239,9 +238,11 @@ h1 {
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
 	width: 100%;
-	text-align: center;
+	height:auto;
+	text-align: right;
 	margin-top: 100%;
 	text-align: center;
+	overflow-y:auto;
 }
 
 .bookings-table {
@@ -314,4 +315,15 @@ h1 {
 .retry-link:hover {
 	background-color: #e9e9e9;
 	/* Slightly darker on hover for better interaction feedback */
+}
+
+.main-content {
+    padding-top: 60px; /* Adjust this value based on the actual height of your navbar */
+    width: 100%;
+    max-width: 1000px; /* Or your desired width */
+    margin: auto;
+    position: relative; /* Important for z-index */
+    z-index: 1; /* Ensures content is on top of the page background */
+    overflow-y: auto; /* Allows vertical scrolling */
+    height: calc(100vh - 60px); /* Full height minus navbar height */
 }
