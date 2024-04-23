@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,18 +54,19 @@ public class SignUpServlet extends HttpServlet {
 ////			DbConnection conn = new DbConnection();
 //			Connection conn = getConnection();
 			User oldUser = UserDao.selectUser(user.getUsername());
-			System.out.println("SignupServlet user: "+user.getUsername());
-			if (oldUser.getUsername()!=null) {
+			System.out.println("SignupServlet user: " + user.getUsername());
+			if (oldUser.getUsername() != null) {
 				isUserExists = true;
-				response.sendRedirect("UserExists.jsp");
-			}
-			else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserExists.jsp");
+				dispatcher.forward(request, response);
+//				response.sendRedirect("UserExists.jsp");
+			} else {
 				UserDao.insertUser(user);
-				response.sendRedirect("RegistrationSuccess.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/RegistrationSuccess.jsp");
+				dispatcher.forward(request, response);
+//				response.sendRedirect("RegistrationSuccess.jsp");
 			}
-			
 
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

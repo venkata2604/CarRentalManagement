@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,47 +54,24 @@ public class BookingServlet extends HttpServlet {
 		String fromDate = request.getParameter("fromDate");
 		String toDate = request.getParameter("toDate");
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
+		System.out.println("Booking Servlet Session "+ session);
+		
 
 		session.setAttribute("fromDate", fromDate);
 		session.setAttribute("toDate", toDate);
 
-//		try {
-//			booking.setUserId((int) session.getAttribute("userid"));
-//			booking.setStartDate(fromDate);
-//			booking.setEndDate(toDate);
-//			booking.setTotalPrice(10);
-//			booking.setCarId(1);
-//			isBookingUpdated = BookingDao.insertBooking(booking);
-//
-//			if (isBookingUpdated) {
-//				response.sendRedirect("CarSelection.jsp");
-//
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			response.sendRedirect("BookingPage.jsp");
-//			// insert error page here
-//		}
-
-		// add to database based on booking ID and user ID
-
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		try {
-//			startDate= sdf.parse(fromDate);
-//			endDate = sdf.parse(toDate);
-//			
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
 		if ((fromDate!=null)&& (toDate!=null)) {
-			response.sendRedirect("CarSelection.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CarSelection.jsp");
+			dispatcher.forward(request, response);
+			
+//			response.sendRedirect("CarSelection.jsp");
 		}
 		else {
-			response.sendRedirect("BookingPage.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BookingPage.jsp");
+			dispatcher.forward(request, response);
+			
+//			response.sendRedirect("BookingPage.jsp");
 
 		}
 		System.out.println("The from and to dates are :" + fromDate + toDate);

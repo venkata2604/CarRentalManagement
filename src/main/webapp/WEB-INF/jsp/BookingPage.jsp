@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<% session = request.getSession(false); %>
+<% if (session == null || session.getAttribute("username") == null) {
+	response.sendRedirect("Index.jsp");
+} %>
 
 <!DOCTYPE html>
 <html>
@@ -10,11 +15,12 @@
 </head>
 <body>
 	<div class="navbar">
-		<a href="Index.jsp">Home</a> <a href="ViewBookings.jsp">View
+		<a href="BookingPage.jsp">Home</a> <a href="ViewBookingsServlet">View
 			Bookings</a> <a href="Profile.jsp">Profile</a> <a href="LogoutServlet">Logout</a>
 	</div>
 	<div class="content">
 		<div class="form-container">
+		
 			<h1>Make a Booking</h1>
 			<form action="BookingServlet" method="post" class="form-style">
 				<div class="form-row">

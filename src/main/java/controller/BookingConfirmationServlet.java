@@ -55,18 +55,16 @@ public class BookingConfirmationServlet extends HttpServlet {
 			car.setStatus("Rented");
 			boolean isCarUpdated = CarDao.updateCarStatus(car);
 			if ((booking != null )&& (car!=null)&(isBookingUpdated)&&(isCarUpdated)) {
+				
+				
 				response.sendRedirect("BookingConfirmation.jsp");
 			}
-			
-//			session.setAttribute("userid", booking.getUserId());
-			
+						
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 
 	}
 

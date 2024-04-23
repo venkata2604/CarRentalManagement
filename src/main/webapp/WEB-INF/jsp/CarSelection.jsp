@@ -2,6 +2,11 @@
 <%@ page import="java.util.List"%>
 <%@ page import="model.Car"%>
 <%@ page import="dao.CarDao"%>
+
+<% session = request.getSession(false); %>
+<% if (session == null || session.getAttribute("username") == null) {
+	response.sendRedirect("Index.jsp");
+} %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +16,8 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="Index.jsp">Home</a>
-        <a href="ViewBookings.jsp">View Bookings</a>
+        <a href="BookingPage.jsp">Home</a>
+        <a href="ViewBookingsServlet">View Bookings</a>
         <a href="Profile.jsp">Profile</a>
         <a href="LogoutServlet">Logout</a>
     </div>

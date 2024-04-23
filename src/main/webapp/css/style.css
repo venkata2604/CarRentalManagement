@@ -1,5 +1,5 @@
 /* File: css/style.css */
-body {
+body, html {
 	font-family: 'Arial', sans-serif; /* Default font for the body */
 	background-color: #f4f4f4;
 	margin: 0;
@@ -42,7 +42,8 @@ body {
 	border-radius: 8px;
 }
 
-.login-form input[type="text"], .login-form input[type="password"], .login-form input[type="email"] {
+.login-form input[type="text"], .login-form input[type="password"],
+	.login-form input[type="email"] {
 	width: 100%;
 	padding: 10px;
 	margin-top: 10px;
@@ -88,7 +89,8 @@ h1 {
 	text-align: center;
 }
 
-.form-style input[type="text"], .form-style input[type="password"], .form-style input[type="email"] {
+.form-style input[type="text"], .form-style input[type="password"],
+	.form-style input[type="email"] {
 	width: calc(100% - 20px);
 	padding: 10px;
 	margin-top: 10px;
@@ -102,7 +104,6 @@ h1 {
 	border: 1px solid #ccc;
 	border-radius: 4px;
 }
-
 
 .form-style button {
 	width: 100%;
@@ -130,13 +131,13 @@ h1 {
 }
 
 .signup-container {
-    background: white;
-    padding: 2em;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    width: 360px; /* Adjust width as needed */
-    text-align: center;
-    margin-top: 40px; /* Ensure it's not covered by the fixed navbar */
+	background: white;
+	padding: 2em;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	width: 360px; /* Adjust width as needed */
+	text-align: center;
+	margin-top: 40px; /* Ensure it's not covered by the fixed navbar */
 }
 
 .car-container {
@@ -164,40 +165,153 @@ h1 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding-top: 60px; /* Adjust based on navbar height */
+	padding-top: 80px; /* Adjust based on navbar height */
 	height: calc(100% - 60px); /* Adjust based on navbar height */
 }
 
 .radio-group {
-    display: grid;
-    grid-template-columns: auto 1fr;  /* One column for the radio button, one for the label */
-    gap: 10px;  /* Space between columns */
-    align-items: center;
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	/* One column for the radio button, one for the label */
+	gap: 10px; /* Space between columns */
+	align-items: center;
+	margin: 10px 0;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
 }
 
 .radio-group label {
-    font-size: 16px;
-    color: #333;
-    text-align: left;
+	font-size: 16px;
+	color: #333;
+	text-align: left;
 }
 
 .radio-group input[type="radio"] {
-    justify-self: start;  /* Aligns the radio button to the start of its grid column */
-    cursor: pointer;
+	justify-self: start;
+	/* Aligns the radio button to the start of its grid column */
+	cursor: pointer;
 }
 
 .login-link {
-    margin-top: 15px;
-    font-size: 0.9em;
+	margin-top: 15px;
+	font-size: 0.9em;
 }
 
 .login-link a {
-    color: #0056b3;
-    text-decoration: none;
+	color: #0056b3;
+	text-decoration: none;
 }
 
+.edit-btn, .delete-btn {
+	padding: 10px 20px; /* Increased padding for a more prominent button */
+	margin: 5px; /* Adds some space around the buttons */
+	text-decoration: none;
+	border: none; /* Removes any default border */
+	color: white;
+	border-radius: 8px; /* Rounder edges */
+	font-size: 14px;
+	cursor: pointer; /* Changes cursor to indicate clickable button */
+	display: inline-block; /* Allows margin and padding adjustments */
+	transition: background-color 0.3s;
+	/* Smooth background color transition */
+}
 
+.edit-btn {
+	background-color: #ffbb33; /* More vibrant yellow */
+}
+
+.delete-btn {
+	background-color: #ff4444; /* More vibrant red */
+}
+
+.edit-btn:hover {
+	background-color: #ffcc00; /* Even more vivid yellow on hover */
+}
+
+.delete-btn:hover {
+	background-color: #cc0000; /* Even more vivid red on hover */
+}
+
+.view-bookings-container {
+	background: white;
+	padding: 2em;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	width: 100%;
+	text-align: center;
+	margin-top: 100%;
+	text-align: center;
+}
+
+.bookings-table {
+	width: 100%; /* Full width */
+	margin-top: 20px; /* Spacing above the table */
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+	border-radius: 8px; /* Rounded corners for the table */
+	overflow-y: auto; /* Adds scroll to the main content */
+}
+
+.bookings-table th, .bookings-table td {
+	border-bottom: 1px solid #ddd; /* Light border for each row */
+	padding: 15px; /* Spacious padding for content */
+	text-align: left; /* Align text to the left */
+}
+
+.bookings-table tr:last-child td {
+	border-bottom: none; /* Removes bottom border from the last row */
+}
+
+.bookings-table tr:hover {
+	background-color: #f9f9f9; /* Light hover effect for rows */
+}
+
+/* Buttons styles */
+.edit-btn, .delete-btn {
+	padding: 10px 20px; /* Uniform padding */
+	text-decoration: none; /* No underline */
+	border: none; /* No border */
+	color: white; /* White text */
+	border-radius: 20px; /* Rounded edges */
+	cursor: pointer; /* Pointer cursor on hover */
+	display: inline-block; /* Needed for margins and padding to work */
+}
+
+.edit-btn {
+	background-color: #ffbb33; /* Vibrant yellow */
+}
+
+.delete-btn {
+	background-color: #ff4444; /* Vibrant red */
+}
+
+.edit-btn:hover, .delete-btn:hover {
+	opacity: 0.9;
+	/* Slight transparency on hover for interaction feedback */
+}
+
+.form-container {
+	/* Styles for your form-container */
+	max-width: 600px; /* Or any other max-width or width */
+	margin: 0 auto; /* Centers the form-container */
+	padding: 20px;
+	box-sizing: border-box; /* Includes padding in the width */
+}
+
+.retry-link {
+	display: block;
+	/* Makes the link take up the full width of its container */
+	margin-top: 20px;
+	color: #0056b3;
+	text-decoration: none;
+	font-weight: bold;
+	padding: 10px;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	border: 1px solid #ccc;
+}
+
+.retry-link:hover {
+	background-color: #e9e9e9;
+	/* Slightly darker on hover for better interaction feedback */
+}

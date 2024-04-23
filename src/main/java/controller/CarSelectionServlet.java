@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,13 +59,21 @@ public class CarSelectionServlet extends HttpServlet {
 			isBookingUpdated = BookingDao.insertBooking(booking);
 
 			if (isBookingUpdated) {
-				response.sendRedirect("BookingConfirmationServlet");
+				System.out.println("Inside the CarSelectionServlet");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/BookingConfirmationServlet");
+				dispatcher.forward(request, response);
+				
+//				response.sendRedirect("BookingConfirmationServlet");
 
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			response.sendRedirect("BookinConfirmation.jsp");
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BookinConfirmation.jsp");
+			dispatcher.forward(request, response);
+			
+//			response.sendRedirect("BookinConfirmation.jsp");
 			String carMessage = "car selection failed please select again";
 			// insert error page here
 		}

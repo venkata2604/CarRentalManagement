@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%
+session = request.getSession(false);
+%>
+<%
+if (session == null || session.getAttribute("username") == null) {
+	response.sendRedirect("Index.jsp");
+}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +28,8 @@ String returnDate = (String) session.getAttribute("toDate");
 
 </head>
 <body>
-<div class="navbar">
-		<a href="Index.jsp">Home</a> <a href="ViewBookings.jsp">View
+	<div class="navbar">
+		<a href="BookingPage.jsp">Home</a> <a href="ViewBookingsServlet">View
 			Bookings</a> <a href="Profile.jsp">Profile</a> <a href="LogoutServlet">Logout</a>
 	</div>
 	<div class="content">
@@ -29,16 +38,31 @@ String returnDate = (String) session.getAttribute("toDate");
 			<h1>Booking Confirmation</h1>
 
 
-		<% if (bookingId != 0) { %>
-                <p class="confirmation-message">Thank you for your booking.</p>
-                <p><strong>Booking ID:</strong> <%= bookingId %></p>
-                <p><strong>Car Model:</strong> <%= carModel %></p>
-                <p><strong>Pick-up Date:</strong> <%= bookingDate %></p>
-                <p><strong>Return Date:</strong> <%= returnDate %></p>
-                <a href="BookingServlet" class="button">Return to Home</a>
-            <% } else { %>
-                <p class="error-message">There was a problem with your booking. Please try again or contact support.</p>
-            <% } %>
+			<%
+			if (bookingId != 0) {
+			%>
+			<p class="confirmation-message">Thank you for your booking.</p>
+			<p>
+				<strong>Booking ID:</strong>
+				<%=bookingId%></p>
+			<p>
+				<strong>Car Model:</strong>
+				<%=carModel%></p>
+			<p>
+				<strong>Pick-up Date:</strong>
+				<%=bookingDate%></p>
+			<p>
+				<strong>Return Date:</strong>
+				<%=returnDate%></p>
+			<a href="BookingServlet" class="button">Return to Home</a>
+			<%
+			} else {
+			%>
+			<p class="error-message">There was a problem with your booking.
+				Please try again or contact support.</p>
+			<%
+			}
+			%>
 
 		</div>
 	</div>

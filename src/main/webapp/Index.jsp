@@ -10,8 +10,6 @@
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
 	rel="stylesheet">
 
-
-
 </head>
 <body>
 
@@ -23,7 +21,7 @@
 				required>
 			<button type="submit">Sign in</button>
 			<p class="signup-link">
-				Don't have an account? <a href="SignUp.jsp">Sign Up</a>
+				Don't have an account? <a href="SignUpDispatcherServlet">Sign Up</a>
 			</p>
 		</form>
 	</div>
