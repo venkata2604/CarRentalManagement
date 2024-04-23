@@ -48,12 +48,15 @@ public class SignInServlet extends HttpServlet {
 			System.out.println("Db retrieved password: " + dbpassword);
 			String userPassword = request.getParameter("password");
 			System.out.println("user entered password : " + userPassword);
-
+			
+			request.getSession().setAttribute("fromDate", username);
+			request.getSession().setAttribute("userid", userdao.selectUser(username).getUserId());
 			if (userPassword.equals(dbpassword)) {
 				System.out.println("Login Successful");
 				response.sendRedirect("BookingPage.jsp");
 			} else {
 				System.out.println("username or password wrong.");
+				response.sendRedirect("Index.jsp");
 			}
 
 		} else {

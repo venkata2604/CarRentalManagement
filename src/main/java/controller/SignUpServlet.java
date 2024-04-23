@@ -45,20 +45,21 @@ public class SignUpServlet extends HttpServlet {
 		user.setEmail(request.getParameter("email"));
 		user.setFirstName(request.getParameter("firstName"));
 		user.setLastName(request.getParameter("lastName"));
+		boolean isUserExists = false;
 
 		System.out.println("Printing form data from signup: " + user.getEmail() + user.getFirstName());
 
 		try {
-			UserDao userdao = new UserDao();
 ////			DbConnection conn = new DbConnection();
 //			Connection conn = getConnection();
-
-			if (DaoUtils.isUserExists(user.getUsername())) {
+			User oldUser = UserDao.selectUser(user.getUsername());
+			System.out.println("SignupServlet user: "+user.getUsername());
+			if (oldUser.getUsername()!=null) {
+				isUserExists = true;
 				response.sendRedirect("UserExists.jsp");
-				
 			}
 			else {
-				userdao.insertUser(user);
+				UserDao.insertUser(user);
 				response.sendRedirect("RegistrationSuccess.jsp");
 			}
 			

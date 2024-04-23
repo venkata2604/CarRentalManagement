@@ -1,7 +1,11 @@
-write checks such as isUsernameExists, isEmailExists,priceCalculation for bookings etc in this 
-
+write checks such as isUsernameExists, 
+isEmailExists,priceCalculation for bookings etc in this 
 
 insert car dao 
 
-
 implement error page for each try catch 
+
+make index.jsp set cookies to authenticate and only allow to go to other pages
+make index.jsp landing page using web.xml?
+logout page
+fix return to home

@@ -35,7 +35,7 @@ public class UserDao {
 	 * "  (username, password, email, firstName,  lastName) VALUES " +
 	 * " (?, ?, ?, ?, ?);";
 	 */
-	public void insertUser(User user) throws SQLException {
+	public static void insertUser(User user) throws SQLException {
 		System.out.println(INSERT_USERS_SQL);
 		// try-with-resource statement will auto close the connection.
 		try (Connection connection = DbConnection.getConnection();
@@ -53,7 +53,7 @@ public class UserDao {
 		}
 	}
 
-	public User selectUser(String username) {
+	public static User selectUser(String username) {
 		User user = new User();
 		// Step 1: Establishing a Connection
 		try (Connection connection = DbConnection.getConnection();

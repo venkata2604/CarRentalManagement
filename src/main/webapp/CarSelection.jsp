@@ -1,71 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@page import="java.util.List"%>
-<%@page import="model.Car"%>
-<%@page import="dao.CarDao"%>
-<%
-CarDao carDao = new CarDao(); // Assuming CarDAO has the selectAllCars method
-List<Car> cars = CarDao.selectAllCars(); // Execute method to fetch cars within a scriptlet, which is request scoped
-%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List"%>
+<%@ page import="model.Car"%>
+<%@ page import="dao.CarDao"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Booking</title>
+    <meta charset="ISO-8859-1">
+    <title>Car Selection</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<%
-String fromDate = (String) session.getAttribute("fromDate");
-String toDate = (String) session.getAttribute("toDate");
-%>
-
 <body>
-	<h1>Dates are set</h1>
-	<h1>Choose a Car</h1>
-	<%
-	if (fromDate != null || toDate != null) {
-	%>
-	<p>
-		Your booking dates are From:
-		<%=fromDate%>
-		to
-		<%=toDate%>
-
-
-
-	</p>
-	<%
-	} else {
-	%>
-	<p>dates are null choose again</p>
-	<%
-	}
-	%>
-
-	<%
-	if (cars != null && !cars.isEmpty()) {
-	%>
-	<form action="BookingConfirmationServlet" method="post">
-
-		<%
-		for (Car car : cars) {
-		%>
-		<div>
-
-			<input type="radio" id="car<%=car.getCarId()%>" name="selectedCarId"
-				value="<%=car.getCarId()%>"> <label
-				for="car<%=car.getCarId()%>"><%=car.getMake()%> <%=car.getModel()%>
-				- <%=car.getYear()%> ||||| Seats: - <%=car.getNumberOfSeats()%>-
-				||Price : $<%=car.getPricePerDay()%> - <%=car.getStatus()%></label>
-		</div>
-		<%
-		}
-		%>
-		<input type="submit" value="Submit Choice">
-	</form>
-	<% 	} else { 	%>
-	<p>No cars available.</p>
-	<%
-	}
-	%>
+    <div class="navbar">
+        <a href="Index.jsp">Home</a>
+        <a href="ViewBookings.jsp">View Bookings</a>
+        <a href="Profile.jsp">Profile</a>
+        <a href="LogoutServlet">Logout</a>
+    </div>
+    <div class="content">
+        <div class="car-container">
+            <h1>Choose a Car</h1>
+            <form action="CarSelectionServlet" method="post" class="form-style">
+                <% 
+                List<Car> cars = CarDao.selectAllCars();
+                for (Car car : cars) {
+                %>
+                <div class="radio-group">
+                    <input type="radio" id="car<%=car.getCarId()%>" name="selectedCarId" value="<%=car.getCarId()%>">
+                    <label for="car<%=car.getCarId()%>"><%=car.getMake()%> <%=car.getModel()%> - <%=car.getYear()%> | Seats: <%=car.getNumberOfSeats()%> | Price: $<%=car.getPricePerDay()%> | Status: <%=car.getStatus()%></label>
+                </div>
+                <% } %>
+                <button type="submit">Select Car</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

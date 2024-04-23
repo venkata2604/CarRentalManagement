@@ -4,24 +4,28 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Car Rental Management</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+	rel="stylesheet">
 </head>
 <body>
-	<FORM action="SignUpServlet">
-		<input type="text" name="username" placeholder="username" value= "user1" required><br>
-		<input type="password" name="password" placeholder="password" value = "pass" required><br>
-		<input type="email" name="email" placeholder="email" value= "user1@gmail.com" required><br>
-
-		<input type="text" name="firstName" placeholder="first name" value = "firstname User" required><br>
-		<input type="text" name="lastName" placeholder="last name" value = "lastname user" required><br>
-
-		<input type="submit" value="Sign Up">
-		<a href = "Index.jsp">Log in</a>
-
-
-
-
-	</FORM>
+	<div class="login-container">
+		<h1>Car Rental Management</h1>
+		<form action="SignUpServlet" method="post" class="login-form">
+			<input type="text" name="username" placeholder="Username" required>
+			<input type="password" name="password" placeholder="Password"
+				required> <input type="email" name="email"
+				placeholder="Email" required> <input type="text"
+				name="firstName" placeholder="First Name" required> <input
+				type="text" name="lastName" placeholder="Last Name" required>
+			<button type="submit">Sign Up</button>
+			<p class="signup-link">
+				Already have an account? <a href="Index.jsp">Log in</a>
+			</p>
+		</form>
+	</div>
 
 </body>
 </html>

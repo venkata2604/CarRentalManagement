@@ -18,8 +18,9 @@ public class BookingDao {
 	private static final String INSERT_BOOKINGS_SQL = "INSERT INTO bookings"
 			+ "  (userid, carid, startdate, enddate,  totalprice, status) VALUES " + " (?, ?, ?, ?, ?, ?);";
 	public static final String SELECT_ALL_BOOKINGS = "SELECT * FROM bookings";
-	public static final String UPDATE_A_BOOKING_STATUS = "UPDATE booking SET STATUS =? where bookingid = ?";
-
+	public static final String UPDATE_A_BOOKING_STATUS = "UPDATE bookings SET STATUS =? where bookingid = ?";
+	public static final String SELECT_LATEST_BOOKING = "SELECT * FROM bookings ORDER BY bookingtimestamp DESC LIMIT 1";
+	
 	public static Bookings selectBooking(int bookingId) {
 
 		Bookings booking = new Bookings();
@@ -58,7 +59,9 @@ public class BookingDao {
 	}
 	
 	
-	public void insertBooking(Bookings booking) throws SQLException {
+	public static boolean insertBooking(Bookings booking) throws SQLException {
+		boolean bookingInserSuccessful = false;
+		
 		System.out.println(INSERT_BOOKINGS_SQL);
 		// try-with-resource statement will auto close the connection.
 		try (Connection connection = DbConnection.getConnection();
@@ -72,9 +75,12 @@ public class BookingDao {
 
 			System.out.println(preparedStatement);
 			preparedStatement.executeUpdate();
+			bookingInserSuccessful = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return bookingInserSuccessful;
 	}
 
 	public static List<Bookings> selectAllBookings() {
@@ -125,7 +131,8 @@ public class BookingDao {
 		boolean bookingUpdated = false;
 		try (Connection connection = DbConnection.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_A_BOOKING_STATUS)) {
-			booking.setStatus("Rented");
+			System.out.println(preparedStatement);
+
 			preparedStatement.setString(1, booking.getStatus());
 			preparedStatement.setInt(2, booking.getCarId());
 			bookingUpdated = preparedStatement.executeUpdate() > 0;
@@ -133,6 +140,51 @@ public class BookingDao {
 		}
 
 		return bookingUpdated;
+	}
+	
+	public static Bookings latestBooking() throws SQLException{
+		Bookings booking = new Bookings();
+		
+		try (Connection connection = DbConnection.getConnection();
+
+				// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LATEST_BOOKING);) {
+			System.out.println(preparedStatement);
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+
+			// Step 4: Process the ResultSet object.
+			while (rs.next()) {
+				booking = new Bookings();
+
+				int bookingId = rs.getInt("bookingId");
+				int userid = rs.getInt("userid");
+				int carid = rs.getInt("carid");
+				String startDate = rs.getString("startDate");
+				String endDate = rs.getString("endDate");
+				double totalPrice = rs.getDouble("totalPrice");
+				String Status = rs.getString("status");
+				String bookingTimeStamp = rs.getString("bookingtimestamp");
+
+				booking.setBookingId(bookingId);
+				booking.setUserId(userid);
+				booking.setCarId(carid);
+				booking.setStartDate(startDate);
+				booking.setEndDate(endDate);
+				booking.setTotalPrice(totalPrice);
+				booking.setStatus(Status);
+				booking.setBookingTimeStamp(bookingTimeStamp);
+			}
+			
+			
+		}
+		
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return booking;
+		
+		
 	}
 
 	public static void main(String[] args) {

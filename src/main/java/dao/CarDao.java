@@ -20,6 +20,8 @@ public class CarDao {
 		Car car = new Car();
 		try (Connection connection = DbConnection.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_A_CAR_BY_ID);) {
+			System.out.println(preparedStatement);
+
 			preparedStatement.setInt(1, carId);
 
 			ResultSet rs = preparedStatement.executeQuery();
@@ -100,6 +102,8 @@ public class CarDao {
 		boolean carUpdated = false;
 		try (Connection connection = DbConnection.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_A_CAR_STATUS)) {
+			System.out.println(preparedStatement);
+
 			car.setStatus("Rented");
 			preparedStatement.setString(1, car.getStatus());
 			preparedStatement.setInt(2, car.getCarId());
