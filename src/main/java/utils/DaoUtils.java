@@ -7,9 +7,9 @@ public class DaoUtils {
 
 	public static boolean isUserExists(String username) {
 		boolean userExists = false;
-		UserDao userdao = new UserDao();
-		User user = userdao.selectUser(username);
-//		System.out.println("user: "+ user);
+//		UserDao userdao = new UserDao();
+		User user = UserDao.selectUser(username);
+		System.out.println("user: "+ user);
 		
 
 		if (user != null) {

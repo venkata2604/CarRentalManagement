@@ -15,8 +15,8 @@
 </head>
 <body>
 	<div class="navbar">
-		<a href="BookingPage.jsp">Home</a> <a href="ViewBookingsServlet">View
-			Bookings</a> <a href="Profile.jsp">Profile</a> <a href="LogoutServlet">Logout</a>
+		<a href="BookingServlet">Home</a> <a href="ViewBookingsServlet">View
+			Bookings</a>  <a href="LogoutServlet">Logout</a>
 	</div>
 	<div class="content">
 		<div class="form-container">

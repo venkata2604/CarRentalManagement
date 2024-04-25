@@ -7,16 +7,19 @@ body, html {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	height: auto;
 }
 
 .navbar {
-	background-color: #333; /* Dark navbar for contrast */
+	background-color: #333;
 	overflow: hidden;
+	display: flex; /* Use flexbox for navbar layout */
+	justify-content: space-between; /* Space between items */
+	align-items: center; /* Vertically center items */
 	width: 100%;
 	top: 0;
 	left: 0;
-	position: fixed; /* Navbar fixed at the top */
+	position: fixed;
 }
 
 .navbar a {
@@ -31,6 +34,15 @@ body, html {
 .navbar a:hover {
 	background-color: #ddd;
 	color: black;
+}
+
+.nav-right {
+	display: flex;
+	align-items: center;
+}
+
+.navbar a:last-child {
+    margin-left: auto; /* This will push the logout button to the right */
 }
 
 .login-container {
@@ -130,6 +142,18 @@ h1 {
 	margin-top: 20px; /* Additional spacing from the top */
 }
 
+.update-container {
+	background: white;
+	padding: 2em;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	width: 350px;
+	text-align: center; /* Ensures text inside the container is centered */
+	margin-top: 20px; /* Additional spacing from the top */
+	
+	
+}
+
 .signup-container {
 	background: white;
 	padding: 2em;
@@ -154,6 +178,8 @@ h1 {
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
+	
+	
 }
 
 .form-row label {
@@ -238,11 +264,11 @@ h1 {
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
 	width: 100%;
-	height:auto;
+	height: auto;
 	text-align: right;
 	margin-top: 100%;
 	text-align: center;
-	overflow-y:auto;
+	overflow-y: auto;
 }
 
 .bookings-table {
@@ -318,12 +344,13 @@ h1 {
 }
 
 .main-content {
-    padding-top: 60px; /* Adjust this value based on the actual height of your navbar */
-    width: 100%;
-    max-width: 1000px; /* Or your desired width */
-    margin: auto;
-    position: relative; /* Important for z-index */
-    z-index: 1; /* Ensures content is on top of the page background */
-    overflow-y: auto; /* Allows vertical scrolling */
-    height: calc(100vh - 60px); /* Full height minus navbar height */
+	padding-top: 60px;
+	/* Adjust this value based on the actual height of your navbar */
+	width: 100%;
+	max-width: 1000px; /* Or your desired width */
+	margin: auto;
+	position: relative; /* Important for z-index */
+	z-index: 1; /* Ensures content is on top of the page background */
+	overflow-y: auto; /* Allows vertical scrolling */
+	height: calc(100vh - 60px); /* Full height minus navbar height */
 }

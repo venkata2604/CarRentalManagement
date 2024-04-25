@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,7 +40,7 @@ public class BookingConfirmationServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Bookings booking = new Bookings();
 		Car car = new Car();
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		String carId = request.getParameter("selectedCarId");
@@ -47,6 +48,7 @@ public class BookingConfirmationServlet extends HttpServlet {
 		try {
 			booking = BookingDao.latestBooking();
 			car = CarDao.selectCar(booking.getCarId());
+			System.out.println("Booking Confirmation bookingId db: "+ booking.getBookingId());
 			session.setAttribute("bookingId", booking.getBookingId());
 			session.setAttribute("carid", booking.getCarId());
 			session.setAttribute("carModel", car.getModel());
@@ -54,13 +56,13 @@ public class BookingConfirmationServlet extends HttpServlet {
 			boolean isBookingUpdated = BookingDao.updateBookingStatus(booking);
 			car.setStatus("Rented");
 			boolean isCarUpdated = CarDao.updateCarStatus(car);
-			if ((booking != null )&& (car!=null)&(isBookingUpdated)&&(isCarUpdated)) {
-				
-				
-				response.sendRedirect("BookingConfirmation.jsp");
+			if ((booking != null) && (car != null) & (isBookingUpdated) && (isCarUpdated)) {
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BookingConfirmation.jsp");
+				dispatcher.forward(request, response);
+
 			}
-						
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

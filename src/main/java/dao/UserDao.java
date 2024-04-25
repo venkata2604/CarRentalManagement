@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 
 import model.User;
 
@@ -173,7 +173,7 @@ public class UserDao {
 	}
 
 	public static void main(String[] args) {
-		UserDao userdao = new UserDao();
+//		UserDao userdao = new UserDao();
 		User user = new User();
 		user.setUsername("usernamedao");
 		user.setEmail("usernamedao@gmail.com");

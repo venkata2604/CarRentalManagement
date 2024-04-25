@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Connection;
+//import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.DbConnection;
+//import dao.DbConnection;
 import dao.UserDao;
-import dao.DbConnection.*;
+//import dao.DbConnection.*;
 import model.User;
-import utils.DaoUtils;
+//import utils.DaoUtils;
 
 /**
  * Servlet implementation class SignUp
@@ -47,6 +47,7 @@ public class SignUpServlet extends HttpServlet {
 		user.setFirstName(request.getParameter("firstName"));
 		user.setLastName(request.getParameter("lastName"));
 		boolean isUserExists = false;
+		System.out.println(isUserExists);
 
 		System.out.println("Printing form data from signup: " + user.getEmail() + user.getFirstName());
 
@@ -67,9 +68,12 @@ public class SignUpServlet extends HttpServlet {
 //				response.sendRedirect("RegistrationSuccess.jsp");
 			}
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserExists.jsp");
+			dispatcher.forward(request, response);
+			
 		}
 
 	}

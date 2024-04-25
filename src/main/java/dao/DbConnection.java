@@ -10,13 +10,13 @@ public class DbConnection {
 	private static String dbUsername = "root";
 	private static String dbPassword = "1234";
 
-	private static final String INSERT_USERS_SQL = "INSERT INTO users"
-			+ "  (username, password, email, firstName,  lastName) VALUES " + " (?, ?, ?, ?, ?);";
-
-	private static final String SELECT_USER_BY_ID = "select username ,email, firstName, lastName, email from users where username =?";
-	private static final String SELECT_ALL_USERS = "select * from users";
-	private static final String DELETE_USERS_SQL = "delete from users where username = ?;";
-	private static final String UPDATE_USERS_SQL = "update users set username = ?, password = ?, firstName = ?, lastName = ?, email= ? where id = ?;";
+//	private static final String INSERT_USERS_SQL = "INSERT INTO users"
+//			+ "  (username, password, email, firstName,  lastName) VALUES " + " (?, ?, ?, ?, ?);";
+//
+//	private static final String SELECT_USER_BY_ID = "select username ,email, firstName, lastName, email from users where username =?";
+//	private static final String SELECT_ALL_USERS = "select * from users";
+//	private static final String DELETE_USERS_SQL = "delete from users where username = ?;";
+//	private static final String UPDATE_USERS_SQL = "update users set username = ?, password = ?, firstName = ?, lastName = ?, email= ? where id = ?;";
 
 	
 	
@@ -39,7 +39,7 @@ public class DbConnection {
 	
 	
 	public static void main(String[] args) {
-		DbConnection conn = new DbConnection();
-		System.out.println(conn.getConnection());
+//		DbConnection conn = new DbConnection();
+		System.out.println(DbConnection.getConnection());
 	}
 }

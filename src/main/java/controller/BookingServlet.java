@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,14 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import model.Bookings;
-import dao.BookingDao;
-
-import java.text.ParseException;
-//import utils.PriceCalculation;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Servlet implementation class BookingServlet
@@ -40,10 +30,7 @@ public class BookingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Date startDate;
-		Date endDate;
-		Bookings booking = new Bookings();
-		boolean isBookingUpdated = false;
+
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 //		int carId = Integer.parseInt(request.getParameter("selectedCarId"));
@@ -55,22 +42,22 @@ public class BookingServlet extends HttpServlet {
 		String toDate = request.getParameter("toDate");
 
 		HttpSession session = request.getSession(false);
-		System.out.println("Booking Servlet Session "+ session);
-		
+		System.out.println("Booking Servlet Session " + session);
 
 		session.setAttribute("fromDate", fromDate);
 		session.setAttribute("toDate", toDate);
 
-		if ((fromDate!=null)&& (toDate!=null)) {
+		System.out.println("session attributes " + session.getAttribute("toDate"));
+
+		if ((fromDate != null) && (toDate != null)) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CarSelection.jsp");
 			dispatcher.forward(request, response);
-			
+
 //			response.sendRedirect("CarSelection.jsp");
-		}
-		else {
+		} else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BookingPage.jsp");
 			dispatcher.forward(request, response);
-			
+
 //			response.sendRedirect("BookingPage.jsp");
 
 		}

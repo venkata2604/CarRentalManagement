@@ -43,11 +43,14 @@ public class CarSelectionServlet extends HttpServlet {
 		int carId = Integer.parseInt(request.getParameter("selectedCarId"));
 		System.out.println("Carid by user: " + carId);
 		double price = PriceCalculation.singleDayPriceCalculation(carId);
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		session.setAttribute("carId", carId);
 		String fromDate = (String) session.getAttribute("fromDate");
 		String toDate = (String) session.getAttribute("toDate");
+		System.out.println("To date Car selection Servlet: "+toDate);
 		int session_carId = (int) session.getAttribute("carId");
+	
+		
 		
 		try {
 			booking.setUserId((int) session.getAttribute("userid"));
@@ -60,7 +63,8 @@ public class CarSelectionServlet extends HttpServlet {
 
 			if (isBookingUpdated) {
 				System.out.println("Inside the CarSelectionServlet");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BookingConfirmation.jsp");
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("BookingConfirmationServlet");
 				dispatcher.forward(request, response);
 				
 //				response.sendRedirect("BookingConfirmationServlet");
@@ -70,15 +74,15 @@ public class CarSelectionServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/BookingConfirmation.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("CarSelectionServlet");
 			dispatcher.forward(request, response);
 			
 //			response.sendRedirect("BookinConfirmation.jsp");
-			String carMessage = "car selection failed please select again";
+//			String carMessage = "car selection failed please select again";
 			// insert error page here
 		}
 		
-		response.getWriter().println("Total Price of the booking is : $"+ price);
+//		response.getWriter().println("Total Price of the booking is : $"+ price);
 	}
 
 	/**

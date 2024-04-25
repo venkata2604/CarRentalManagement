@@ -5,8 +5,15 @@ session = request.getSession(false);
 %>
 <%
 if (session == null || session.getAttribute("username") == null) {
-	response.sendRedirect("Index.jsp");
+	RequestDispatcher dispatcher = request.getRequestDispatcher("/Index.html");
+	dispatcher.forward(request, response);
 }
+
+//Retrieve booking details from session attributes
+int bookingId = (int) session.getAttribute("bookingId");
+String carModel = (String) session.getAttribute("carModel");
+String bookingDate = (String) session.getAttribute("fromDate");
+String returnDate = (String) session.getAttribute("toDate");
 %>
 
 <!DOCTYPE html>
@@ -19,18 +26,15 @@ if (session == null || session.getAttribute("username") == null) {
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
 	rel="stylesheet">
 <%
-// Retrieve booking details from request attributes
-int bookingId = (int) session.getAttribute("bookingId");
-String carModel = (String) session.getAttribute("carModel");
-String bookingDate = (String) session.getAttribute("fromDate");
-String returnDate = (String) session.getAttribute("toDate");
+
+
 %>
 
 </head>
 <body>
 	<div class="navbar">
 		<a href="BookingPage.jsp">Home</a> <a href="ViewBookingsServlet">View
-			Bookings</a> <a href="Profile.jsp">Profile</a> <a href="LogoutServlet">Logout</a>
+			Bookings</a>  <a href="LogoutServlet">Logout</a>
 	</div>
 	<div class="content">
 		<div class="form-container">

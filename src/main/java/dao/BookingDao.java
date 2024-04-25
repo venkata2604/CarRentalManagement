@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Bookings;
-import model.Car;
-import model.User;
+//import model.Car;
+//import model.User;
 
 public class BookingDao {
 
